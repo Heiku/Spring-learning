@@ -37,7 +37,7 @@ public class SimpleBeanPostProcessor implements BeanPostProcessor, PriorityOrder
         }
 
         // 如果实现了 Ordered 接口，那么对于其他的 bean 还是会使用这个 SimpleBeanPostProcessor
-        System.out.println(bean);
+        //System.out.println(bean);
         return bean;
     }
 
