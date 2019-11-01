@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootllearning.messagesource;
+package com.heiku.spring.springbootlearning.messagesource;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;

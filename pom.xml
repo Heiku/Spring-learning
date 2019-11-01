@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.heiku.spring</groupId>
-    <artifactId>springbootl-learning</artifactId>
+    <artifactId>springboot-learning</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springbootl-learning</name>
     <description>Demo project for Spring Boot</description>

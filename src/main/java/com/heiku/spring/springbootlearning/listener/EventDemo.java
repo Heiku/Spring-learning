@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootllearning.listener;
+package com.heiku.spring.springbootlearning.listener;
 
 import lombok.Data;
 import org.springframework.context.ApplicationEvent;

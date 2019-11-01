@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootllearning.post;
+package com.heiku.spring.springbootlearning;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

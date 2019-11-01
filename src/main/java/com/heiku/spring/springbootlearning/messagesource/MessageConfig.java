@@ -1,9 +1,4 @@
-package com.heiku.spring.springbootllearning.messagesource;
-
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
+package com.heiku.spring.springbootlearning.messagesource;
 
 /**
  * @Author: Heiku

@@ -1,14 +1,10 @@
-package com.heiku.spring.springbootllearning.post;
+package com.heiku.spring.springbootlearning.post;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 如果这里要注入属性，不能采用实现 PriorityOrdered 的方式，因为在 registerBeanPostProcessor 时，

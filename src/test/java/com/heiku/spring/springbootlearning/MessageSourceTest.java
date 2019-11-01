@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootllearning;
+package com.heiku.spring.springbootlearning;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
