@@ -1,0 +1,1 @@
+[Spring 中的 XML schema 扩展机制](https://www.cnkirito.moe/spring-xsd/)
