@@ -2,7 +2,7 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:kirito="http://www.cnkirito.moe/schema/heiku"
+       xmlns:kirito="http://www.cnkirito.moe/schema/heiku" xmlns:dubbo="http://www.cnkirito.moe/schema/heiku"
        xsi:schemaLocation=" http://www.springframework.org/schema/beans
                                 http://www.springframework.org/schema/beans/spring-beans.xsd
                                 http://www.cnkirito.moe/schema/heiku
@@ -10,7 +10,12 @@
 
     <!-- 使用自定义的 xml schema -->
     <kirito:application name="heiku-demo-application"/>
-
     <kirito:service name="heiku-demo-service"/>
 
+
+    <!--
+    <dubbo:application name="demo-provider"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:protocol name="dubbo" port="20881"/>
+    -->
 </beans>
