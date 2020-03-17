@@ -1,10 +1,8 @@
 package com.heiku.spring.springbootlearning;
 
 import com.heiku.spring.springbootlearning.beanDefinition.BeanDefinitionDemo;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 
 /**
