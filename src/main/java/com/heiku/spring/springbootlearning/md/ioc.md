@@ -36,3 +36,46 @@
 组件都是被动的，所有组件的初始化和调用都由容器负责。如果在代码中，控制权由应用代码移到了 ioc外部容器中控制权反转。
 
 ioc 是控制反转，上层控制下层，而不是下层控制上层，类似于好莱坞原则，主要有依赖查找和依赖注入实现。
+
+
+### 依赖查找
+
+* 通过名称查找
+
+    * 直接查找 (BeanFactory)
+    
+    `getBean(name) -> Bean.Id`
+    
+    * 延迟查找
+    
+    通过 ObjectFactory -> ObjectFactoryCreatingFactoryBean # targetBeanName   
+    
+    ObjectFactory 对象并不是直接返回了实际的 Bean，而是一个 Bean 的查找代理(ObjectFactoryCreatingFactoryBean)。  
+    当得到 ObjectFactory 对象时，相当于 Bean 没有被创建，只有当 getObject() 方法时，才会触发 Bean 实例化等生命周期。
+
+延迟依赖查找主要用于获取 BeanFactory 后，不马上获取相关的 Bean，比如在 BeanFactoryPostProcessor 
+接口中获取 ConfigurableListableBeanFactory 时，不马上获取，降低 Bean 过早初始化的情况
+    
+* 通过类型查找
+
+    * 单个 Bean 类型查找
+    
+    `getBean(Class<T>)` 通过Java5之后支持泛型增加的
+    
+    * 集合 Bean 
+    
+    `ListableBeanFactory.getBeansOfType(Class<T>)` 返回 map[beanName]bean
+    
+* 通过 Java 注解查找
+
+    * 单个 Bean 对象
+    
+    * 多个对象
+    
+    `ListableBeanFactory.getBeanWithAnnotation(AnnotationClass<T>)`
+    
+
+#### beanFactory & factoryBean
+
+FactoryBean 是一种特殊的 Bean，需要注册到 IoC 容器，通过容器 getBean 获取 FactoryBean#getObject() 方法的内容，
+而 BeanFactory#getBean 则是依赖查找，如果 Bean 没有初始化，那么将从底层查找或构建
