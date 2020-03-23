@@ -78,4 +78,4 @@ ioc 是控制反转，上层控制下层，而不是下层控制上层，类似�
 #### beanFactory & factoryBean
 
 FactoryBean 是一种特殊的 Bean，需要注册到 IoC 容器，通过容器 getBean 获取 FactoryBean#getObject() 方法的内容，
-而 BeanFactory#getBean 则是依赖查找，如果 Bean 没有初始化，那么将从底层查找或构建
+而 BeanFactory 是 Spring 容器的的顶层接口， BeanFactory#getBean 是依赖查找，如果 Bean 没有初始化，那么将从底层查找或构建
