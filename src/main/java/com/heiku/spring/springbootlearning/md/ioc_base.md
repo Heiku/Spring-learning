@@ -133,7 +133,9 @@ public class User{
 #### beanFactory & factoryBean
 
 FactoryBean 是一种特殊的 Bean，需要注册到 IoC 容器，通过容器 getBean 获取 FactoryBean#getObject() 方法的内容，
-而 BeanFactory#getBean 则是依赖查找，如果 Bean 没有初始化，那么将从底层查找或构建
+可以解决复杂构建 bean 的情况  
+
+而 BeanFactory 是 IoC 的底层容器， BeanFactory#getBean 则是依赖查找，如果 Bean 没有初始化，那么将从底层查找或构建
 
 #### BeanFactory & ApplicationContext
 
