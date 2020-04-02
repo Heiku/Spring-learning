@@ -12,8 +12,46 @@ BeanDefinition 是 Spring Framework 中定义 bean 配置元信息的接口，�
 * 配置设置，比如 Bean 属性（Properties）
 
 
-#### 构建
+#### 构建 BeanDefinition
 
 * BeanDefinitionBuilder
 
+```
+BeanDefinitionBuilder.genericBeanDefinition(User.class)
+builder.addPropertyValue(key, value)
+builder.getBeanDefinition()
+```
+
 * AbstractBeanDefinition 以及派生类
+
+```
+new GenericBeanDefinition();
+genericBeanDefinition.setBeanClass(User.class)
+genericBeanDefinition.setPropertyValues();
+```
+
+#### 注册 BeanDefinition
+
+* XML
+
+`<bena name="" class="User.class"/>`
+
+* Annotation
+
+    * @Bean
+    * @Componment
+    * @Import
+    
+* Java API
+
+    * 命名方式
+    
+    `BeanDefinitionRegistry#registerBeanDefinition(String, BeanDefinition)`
+    
+    * 非命名方式
+    
+    `BeanDefinitionReaderUtils#registerWithGeneratedName(AbstractBeanDefinition, BeanDefinitionRegistry)`
+    
+    * 配置类方式
+    
+    `AnnotatedBeanDefinitionReader#register(Class)`
