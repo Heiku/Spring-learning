@@ -55,3 +55,47 @@ genericBeanDefinition.setPropertyValues();
     * 配置类方式
     
     `AnnotatedBeanDefinitionReader#register(Class)`
+    
+#### 实例化 Spring Bean
+
+* Bean 实例化(Instantiation)
+
+    * 常规方式
+    
+        * 构造器
+        * 静态工厂
+        
+        `<bean id="", class="", factory-method="createUser">`
+        
+        * Bean 工厂方法
+        
+        ```
+        interface UserFactory{
+            default createUser(){
+                return User.createUser();
+            }
+        }
+      
+        class DefaultUserFactory implements UserFactory{
+        }
+        
+        <bean id="userFactory" class="DefaultUserFactory"/>
+        <bean id="" factory-bean="userFactory" factory-method="createUser"/>
+        ```
+        
+        * FactoryBean
+        
+        ```
+        class UserFactoryBean implements FactoeyBean{
+            getObject() -> User.createUser()...
+            getObjectType -> return User.class
+        }
+        ```
+        
+    * 特殊方式
+    
+        * ServiceLoaderFactoryBean
+        
+        * AutowireCapableBeanFactory#createBean(java.lang.Class, int, boolean)
+        
+        * BeanDefinitionRegistry#registryBeanDefinition(String, BeanDefinition)
