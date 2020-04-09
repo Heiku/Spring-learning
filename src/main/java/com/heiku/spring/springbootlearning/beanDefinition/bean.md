@@ -99,3 +99,21 @@ genericBeanDefinition.setPropertyValues();
         * AutowireCapableBeanFactory#createBean(java.lang.Class, int, boolean)
         
         * BeanDefinitionRegistry#registryBeanDefinition(String, BeanDefinition)
+        
+#### 初始化 Spring Bean
+
+Bean 初始化 (Initialization)
+
+* @PostConstruct 方法
+
+* 实现 InitializingBean 接口的 afterPropertiesSet() 方法
+
+* 自定义初始化方法
+
+    * XML 配置： <bean init-method="" />
+    
+    * Java 注解 @Bean(initMethod = "")
+    
+    * Java API： AbstractBeanDefinition#setInitMethodName(string)
+    
+优先级如下：@PostConstruct -> afterPropertiesSet() -> init-method
