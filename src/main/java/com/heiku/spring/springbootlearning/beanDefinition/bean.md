@@ -117,3 +117,41 @@ Bean 初始化 (Initialization)
     * Java API： AbstractBeanDefinition#setInitMethodName(string)
     
 优先级如下：@PostConstruct -> afterPropertiesSet() -> init-method
+
+
+#### 延迟初始化 Spring Bean
+
+* Bean 延迟初始化 (Lazy Initialization)
+
+    * XML: <bean lazy-init="" />
+    
+    * 注解: @Lazy(true)
+
+注册的时候无差别，区别在依赖查找和依赖注入的时候  
+非延迟初始化在应用上下文启动之前进行初始化(`applicationContext#refresh`)，而延迟初始化在启动后，当用到的时候
+进行初始化。
+
+#### 销毁 Spring Bean
+
+* Bean 销毁（Destroy）
+
+    * @PreDestroy
+    
+    * 实现 DisposableBean 接口的 destroy() 方法
+    
+    * 自定义销毁方法
+        * XML: <bean destroy="destroy" .../>
+        * 注解: @Bean(destroy="destroy")
+        * API: AbstractBeanDefinition#setDestroyMethodName(String)
+        
+#### 垃圾回收 Spring Bean
+
+* Bean 垃圾回收
+
+    * 关闭 Spring 容器（应用上下文） `applicationContext.close()`
+    
+    * 执行 GC
+    
+    * Spring Bean 覆盖 finalize() 方法回调
+    
+    

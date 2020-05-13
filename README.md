@@ -10,5 +10,6 @@ a project recording all my spring learning note
 `BeanFactory` 只是实现了 `Bean` 的装配、获取，并未说明 `Bean` 的来源 也就是 `BeanDefinition` 是如何加载的。而这个将 
 `BeanFactory` 和 `BeanDefinitionReader` 结合的工作就由 `ApplicationContext` 完成。
 
-[ioc_base](/src/main/java/com/heiku/spring/springbootlearning/md/ioc_base.md)  
+[bean](/src/main/java/com/heiku/spring/springbootlearning/beanDefinition/bean.md)  
+[ioc_base](/src/main/java/com/heiku/spring/springbootlearning/md/ioc_base.md)   
 [schema](/src/main/java/com/heiku/spring/springbootlearning/xmlschema/xmlSchema.md)  
