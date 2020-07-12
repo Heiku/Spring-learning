@@ -8,6 +8,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Locale;
+import java.util.Stack;
 
 /**
  * @Author: Heiku
@@ -25,7 +26,6 @@ public class MessageSourceTest {
     public void testBaseMessageSource(){
         String n = messageSource.getMessage("exception", null, Locale.ENGLISH);
         System.err.println("en messageSource = " + n);
-
     }
 
     @Test

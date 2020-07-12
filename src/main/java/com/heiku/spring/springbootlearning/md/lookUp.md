@@ -1,6 +1,24 @@
 
 ### 依赖查找
 
+#### 依赖查找的今世前身
+
+* 单一类型依赖查找
+
+    * JNDI - `javax.naming.Context#lookup` (javax.naming.Name)
+    
+    * JavaBeans - `java.beans.beancontext.BeanContext`
+    
+* 集合类型依赖查找
+
+    * java.beans.beancontext.BeanContext
+    
+* 层次性依赖查找
+
+    * java.beans.beancontext.BeanContext
+    
+
+
 #### 单一类型依赖查找
 
 * 根据 Bean 名称查找 `getBean(String Name)`
@@ -41,4 +59,49 @@
     * finAnnotationOnBean(String, Class<? extends Annotation>)
 
 
-建议使用 getBeanNameForType，避免 bean 过早初始化导致的状态的问题。
+`getBeansOfType()` 会提前初始化 bean，如果 bean 未创建的话会抛出 `BeansException`，建议使用 `getBeanNameForType`，对比 BeanDefinition 
+中的 `getBeanClassName` 类是否相同，包括父子基础类关系，因为本质上就是使用这个方法，去避免 bean 过早初始化导致的状态的问题。  
+
+
+#### 层次性依赖查找
+
+层次性依赖查找接口 - HierarchicalBeanFactory
+
+* 双亲 BeanFactory: getParentBeanFactory()
+
+* 层次性查找
+
+    * 根据 Bean 名称查找
+        
+        * 基于 containsLocalBean 方法实现
+        
+    * 根据 Bean 类型查找实例列表
+    
+        * 单一类型：BeanFactoryUtils#beanOfType
+        
+        * 集合类型: BeanFactoryUtils#beansOfTypeIncludingAncestors
+        
+    * 根据 Java 注解查找名称列表
+    
+        * BeanFactoryUtils#beanNamesForTypeIncludingAncestors
+        
+
+#### 延迟依赖查找
+
+* Bean 延迟依赖查找接口
+
+    * org.springframework.beans.factory.ObjectFactory
+    
+    * org.springframework.beans.factory.ObjectProvider
+    
+        * Spring 5 对 Java 8 特性扩展
+            
+            * 函数式接口
+            
+                * getIfAvailable(Supplier)
+                
+                * ifAvailable(Consumer)
+                
+            * Stream 扩展 - stream()
+            
+         
