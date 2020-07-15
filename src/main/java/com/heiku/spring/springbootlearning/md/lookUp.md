@@ -104,4 +104,52 @@
                 
             * Stream 扩展 - stream()
             
-         
+
+#### 内建可查找的依赖
+
+* AbstractApplicationContext 内建可查找的依赖
+
+    * environment
+    
+    * systemProperties
+    
+    * systemEnvironment
+    
+    * messageSource
+    
+    * lifecycleProcessor
+    
+    * applicationEventMulticaster
+    
+* 注解驱动 Spring 应用上下文内建可查找的依赖
+
+    * ConfigurationClassPostProcessor
+    
+    * AutowiredAnnotationBeanPostProcessor
+    
+    * CommonAnnotationBeanProcessor
+    
+    * EventListenerMethodProcessor
+    
+    * DefaultEventListenerFactory
+  
+    * PersistenceAnnotationBeanProcessor
+    
+
+#### 依赖查找中出现的异常
+
+* BeansException
+
+    * NoSuchBeanDefinitionException: 当查找 bean 不存在 ioc 容器中
+    
+        * BeanFactory#getBean / ObjectFactory#getObject
+        
+    * NoUniqueBeanDefinitionException: 类型依赖查找，ioc 容器存在多个 bean 实例
+        
+        * BeanFactory#getBean(Class)
+        
+    * BeanInstantiationException: bean 对应的类型非具体类
+    
+    * BeanCreationException: bean 初始化过程中
+    
+    * BeanDefinitionStoreException: bean 配置元信息非法(xml 配置资源无法打开)
