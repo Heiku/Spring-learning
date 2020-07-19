@@ -1,0 +1,116 @@
+
+### 依赖注入
+
+#### 依赖注入的模式和类型
+
+* 依赖注入类型
+
+    * setter: <property name="user" ref="userBean"/>
+    
+    * 构造器: <constructor-arg name="user" ref="userBean"/>
+    
+    * 字段: @Autowired User user
+    
+    * 方法: @Autowired public void user(User user) {...}
+    
+    * 接口回调: class MyBean implements BeanFactoryAware{...}
+    
+
+#### 自动绑定 (Autowiring) 模式 
+
+* Autowiring modes
+
+    * no: 默认值，未激活，需要手动指定依赖注入对象 ref=""
+    
+    * byName: 根据被注入属性的名称作为 Bean 名称进行依赖查找，并将对象啊你个设置到该属性
+        
+        <property name="name" value="name"/>   可以直接忽略
+    
+    * byType: 根据被注入属性的类型作为依赖类型进行查找，并将对象设置到该属性
+    
+    * constructor: 特殊 byType 类型，用于构造参数
+    
+    
+#### Autowiring 缺点
+
+1. 如果是 byName 模式，在注入属性的时候，如果属性名称发生改变，那么就无法根据名称查找到具体的类型，需要编码的时候仔细维护
+2. 如果是 byType 模式，如果在容器中同时定义了多个相同类型的 bean，那么将会导致在注入的时候造成 NoUniqueBeanException 异常，
+需要手动指定 primary 优先级，带来一定的复杂度
+
+所以建议直接采用精确匹配的方式
+
+
+#### Setter 方法注入
+
+* 手动模式
+
+    * XML 资源配置元信息
+    
+    * Java 注解配置元信息
+    
+    * API 配置元信息
+
+* 自动模式
+
+    * byName
+    
+    * byType
+    
+
+#### 字段注入
+
+* 手动模式
+
+    * Java 注解配置元信息
+    
+        * @Autowired
+        
+        * @Resource
+        
+        * @Inject(可选)
+        
+#### 接口回调注入
+
+* Aware 系列接口回调
+
+    * 自动模式
+    
+        * BeanFactoryAware: 获取 IoC 容器，BeanFactory
+        
+        * ApplicationContextAware: 获取 Spring 应用上下文，ApplicationContext 对象
+        
+        * EnvironmentAware: 获取 Environment 对象
+        
+        * ResourceLoaderAware: 获取资源加载对象，ResourceLoader
+        
+        * BeanClassLoaderAware: 获取加载当前 Bean Class 的 ClassLoader
+        
+        * BeanNameAware: 获取当前 Bean 的名称
+        
+        * MessageSourceAware: 获取 MessageSource对象，用于 Spring 国际化
+        
+        * ApplicationEventPublisherAware: Spring 事件对象
+        
+        * EmbeddedValueResolverAware: StringValueResolver 占位符处理对象
+        
+
+#### 限定注入
+
+* 使用注解 @Qualifier 限定
+
+    * 通过 Bean 名称限定
+    
+    * 通过分组限定
+    
+* 基于注解 @Qualifier 扩展限定
+
+    * 自定义注解 - 如 Spring Cloud 的 @LoadBalanced
+    
+
+#### 依赖处理过程
+
+* 入口 - DefaultListableBeanFactory#resolveDependency
+
+* 依赖描述符 - DependencyDescriptor
+
+* 自动绑定候选对象处理器 - AutowireCandidateResolver 

@@ -5,17 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * user entity
+ * User Holder
  *
  * @author Heiku
- * @date 2020/7/12
+ * @date 2020/7/19
  **/
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class UserHolder {
 
-    private String name;
-
-    private int age;
+    private User user;
 }

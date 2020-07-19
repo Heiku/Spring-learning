@@ -153,3 +153,13 @@
     * BeanCreationException: bean 初始化过程中
     
     * BeanDefinitionStoreException: bean 配置元信息非法(xml 配置资源无法打开)
+    
+    
+#### ObjectFactory & BeanFactory
+
+ObjectFactory 与 BeanFactory 均提供了依赖查找的能力
+
+* ObjectFactory 仅关注一个或一种类型的 bean 依赖查找，并且自身不具备依赖查找的能力，能力由 BeanFactory 输出
+
+* BeanFactory 提供了 单一类型、集合类型以及层次性等多种依赖的查找方式
+
