@@ -135,9 +135,10 @@
     
     * 依赖注入（字段、方法）
 
-1. `doCreateBean` 会调用 `applyMergedBeanDefinitionPostProcessors`，到达 AutowiredAnnotationBeanPostProcessor
-2. 这里的 AutoWiredAnnotationBeanPostProcessor 实现了 MergedBeanDefinitionPostProcessor，会将多个具有继承关系的 beanDefinition 
+1. bean 特殊实例化通过 `AbstractAutowireCapableBeanFactory#createBean()` -> doCreateBean()
+2. `doCreateBean` 会调用 `applyMergedBeanDefinitionPostProcessors`，到达 AutowiredAnnotationBeanPostProcessor
+3. 这里的 AutoWiredAnnotationBeanPostProcessor 实现了 MergedBeanDefinitionPostProcessor，会将多个具有继承关系的 beanDefinition 
 进行属性关联（填充propertyValues）
-3. `postProcessProperties` 会调用 `findAutowiringMetadata`，去查找当前 bean 对象中的元数据(InjectionMetadata)，里面包括了
-待注入的 InjectedElement 信息（field、method） 等
-4. `InjectionMetadata#inject` 开始注入当前 bean 中的注解数据，先通过依赖查找（上面），然后通过 __反射__ 设置 InjectElement 中的属性 field
+4. `postProcessProperties` 会调用 `findAutowiringMetadata`，去查找当前 bean 对象中的元数据(InjectionMetadata)，里面包括了
+待注入的 InjectedElement 信息（field、method） 等，注意：这期间 `static` 字段会被忽略
+5. `InjectionMetadata#inject` 开始注入当前 bean 中的注解数据，先通过依赖查找（上面），然后通过 __反射__ 设置 InjectElement 中的属性 field
