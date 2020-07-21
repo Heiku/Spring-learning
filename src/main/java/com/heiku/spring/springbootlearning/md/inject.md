@@ -111,6 +111,17 @@
 
 * 入口 - DefaultListableBeanFactory#resolveDependency
 
+    1. 判断是否是 lazy，如果lazy 直接返回代理对象（并没有经过依赖查找进行字段赋值，而是等到对象执行方法的时候再进行依赖注入），否则
+    调用 `doResolveDependency()`
+    
+    2. 判断是否是多类型的 bean `resolveMultipleBeans()` 直接返回 
+    
+    3. 不管是查找单bean还是多bean，都会通过 `findAutowireCandidates()` 根据类型匹配查找 bean
+    
+    4. 在单 bean 情况下，如果 bean 个数大于1，选择 primary bean 直接返回 `determineAutowireCandidate()`
+
 * 依赖描述符 - DependencyDescriptor
 
 * 自动绑定候选对象处理器 - AutowireCandidateResolver 
+
+
