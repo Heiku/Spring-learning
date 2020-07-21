@@ -116,7 +116,7 @@
     
     2. 判断是否是多类型的 bean `resolveMultipleBeans()` 直接返回 
     
-    3. 不管是查找单bean还是多bean，都会通过 `findAutowireCandidates()` 根据类型匹配查找 bean
+    3. 不管是查找单bean还是多bean，都会通过 `findAutowireCandidates()` 根据类型匹配查找 bean，可以联想之前的 层次性查找（HierarchicalBeanFactory）
     
     4. 在单 bean 情况下，如果 bean 个数大于1，选择 primary bean 直接返回 `determineAutowireCandidate()`
 
@@ -125,3 +125,19 @@
 * 自动绑定候选对象处理器 - AutowireCandidateResolver 
 
 
+#### @Autowired 注入
+
+* @Autowired 注入过程
+
+    * 元信息解析
+    
+    * 依赖查找
+    
+    * 依赖注入（字段、方法）
+
+1. `doCreateBean` 会调用 `applyMergedBeanDefinitionPostProcessors`，到达 AutowiredAnnotationBeanPostProcessor
+2. 这里的 AutoWiredAnnotationBeanPostProcessor 实现了 MergedBeanDefinitionPostProcessor，会将多个具有继承关系的 beanDefinition 
+进行属性关联（填充propertyValues）
+3. `postProcessProperties` 会调用 `findAutowiringMetadata`，去查找当前 bean 对象中的元数据(InjectionMetadata)，里面包括了
+待注入的 InjectedElement 信息（field、method） 等
+4. `InjectionMetadata#inject` 开始注入当前 bean 中的注解数据，先通过依赖查找（上面），然后通过 __反射__ 设置 InjectElement 中的属性 field
