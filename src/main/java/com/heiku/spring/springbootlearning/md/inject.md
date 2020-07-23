@@ -136,9 +136,83 @@
     * 依赖注入（字段、方法）
 
 1. bean 特殊实例化通过 `AbstractAutowireCapableBeanFactory#createBean()` -> doCreateBean()
+
 2. `doCreateBean` 会调用 `applyMergedBeanDefinitionPostProcessors`，到达 AutowiredAnnotationBeanPostProcessor
+
 3. 这里的 AutoWiredAnnotationBeanPostProcessor 实现了 MergedBeanDefinitionPostProcessor，会将多个具有继承关系的 beanDefinition 
 进行属性关联（填充propertyValues）
+
 4. `postProcessProperties` 会调用 `findAutowiringMetadata`，去查找当前 bean 对象中的元数据(InjectionMetadata)，里面包括了
 待注入的 InjectedElement 信息（field、method） 等，注意：这期间 `static` 字段会被忽略
+
 5. `InjectionMetadata#inject` 开始注入当前 bean 中的注解数据，先通过依赖查找（上面），然后通过 __反射__ 设置 InjectElement 中的属性 field
+
+
+#### @Inject 注入
+
+* @Inject 注入过程
+
+    * @Autowired @Value @Inject 都是使用了AutowiredAnnotationBeanPostProcessor 实现、
+    
+        如果 JSR-330 存在 ClassPath 中，复用 AutowiredAnnotationBeanPostProcessor 实现。
+        
+
+#### Java 通用注解注入原理
+
+* CommonAnnotationBeanPostProcessor
+
+    * 注入注解
+    
+        * javax.xml.ws.WebServiceRef
+        
+        * javax.ejb.EJB
+        
+        * javax.annotation.Resource
+        
+    * 生命周期注解
+    
+        * javax.annotation.PostConstruct
+        
+        * javax.annotation.PreDestroy
+        
+        
+1. CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBeanPostProcessor
+
+2. CommonAnnotationBeanPostProcessor 和 上面的 AutowiredAnnotationBeanPostProcessor 一样，都是处理通用注解，例如 @EJB、@Resource 
+等的属性注入，一样都是采用 InjectMetadata 通过依赖查找后进行反射进行属性注入
+
+3. 同时实现了 InitDestroyAnnotationBeanPostProcessor，会根据当前 bean 查找出 @PostConstruct、@PreDestroy 的注解，解析出当前 bean 的 
+LifeCycleMetadata，并通过 `LifecycleMetadata#invokeInitMethods / invokeDestroyMethods` 进行反射执行 LifeCycleElement 中的 method 
+对象
+
+
+#### 自定义依赖注入注解
+
+* 基于 AutowiredAnnotationBeanPostProcessor 实现
+
+* 自定义实现
+
+    * 生命周期处理
+    
+        * InstantiationAwareBeanPostProcessor
+        
+        * MergedBeanDefinitionPostProcessor
+        
+    * 元数据
+    
+        * InjectedElement
+        
+        * InjectionMetadata
+ 
+ 
+##### 依赖注入的方式
+
+* 构造器注入（必须依赖）
+
+* setter 注入（可选依赖）
+
+* 方法注入
+
+* 字段注入
+
+* 接口回调注入
