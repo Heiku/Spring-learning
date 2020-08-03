@@ -1,1 +1,1 @@
-http\://www.cnkirito.moe/schema/heiku=com.heiku.spring.springbootlearning.xmlschema.HeikuNameSpaceHandler
+http\://www.cnkirito.moe/schema/heiku=com.heiku.spring.springbootlearning.component.xmlschema.HeikuNameSpaceHandler

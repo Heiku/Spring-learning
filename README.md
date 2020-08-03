@@ -12,4 +12,4 @@ a project recording all my spring learning note
 
 [bean](/src/main/java/com/heiku/spring/springbootlearning/beanDefinition/bean.md)  
 [ioc_base](/src/main/java/com/heiku/spring/springbootlearning/md/ioc_base.md)   
-[schema](/src/main/java/com/heiku/spring/springbootlearning/xmlschema/xmlSchema.md)  
+[schema](/com/heiku/spring/springbootlearning/component/xmlschema/xmlSchema.md)  

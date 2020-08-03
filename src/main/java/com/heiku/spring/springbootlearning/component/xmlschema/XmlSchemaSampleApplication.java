@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootlearning.xmlschema;
+package com.heiku.spring.springbootlearning.component.xmlschema;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

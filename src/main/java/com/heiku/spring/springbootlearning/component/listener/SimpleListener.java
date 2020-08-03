@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootlearning.listener;
+package com.heiku.spring.springbootlearning.component.listener;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;

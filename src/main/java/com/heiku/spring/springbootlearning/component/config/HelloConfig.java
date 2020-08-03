@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootlearning.config;
+package com.heiku.spring.springbootlearning.component.config;
 
 import org.springframework.context.annotation.Configuration;
 

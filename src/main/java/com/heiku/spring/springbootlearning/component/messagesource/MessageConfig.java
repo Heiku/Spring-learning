@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootlearning.messagesource;
+package com.heiku.spring.springbootlearning.component.messagesource;
 
 /**
  * @Author: Heiku

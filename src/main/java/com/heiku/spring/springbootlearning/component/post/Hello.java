@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootlearning.post;
+package com.heiku.spring.springbootlearning.component.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootlearning.xmlschema;
+package com.heiku.spring.springbootlearning.component.xmlschema;
 
 import lombok.Data;
 

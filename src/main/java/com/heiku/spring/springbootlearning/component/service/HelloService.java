@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootlearning.service;
+package com.heiku.spring.springbootlearning.component.service;
 
 import org.springframework.stereotype.Component;
 

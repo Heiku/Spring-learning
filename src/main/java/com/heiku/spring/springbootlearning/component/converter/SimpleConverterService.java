@@ -1,4 +1,4 @@
-package com.heiku.spring.springbootlearning.converter;
+package com.heiku.spring.springbootlearning.component.converter;
 
 /**
  * @Author: Heiku
