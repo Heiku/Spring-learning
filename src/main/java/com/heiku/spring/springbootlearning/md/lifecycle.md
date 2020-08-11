@@ -149,3 +149,10 @@ AbstractAutowireCapableBeanFactory#populateBean
     * MessageSourceAware
     
     * ApplicationContextAware
+    
+
+AbstractAutowireCapableBeanFactory#initializeBean() -> invokeAwareMethods，在初始化阶段进行接口回调，设置 bean 的 BeanNameAware,
+BeanClassLoaderAware, BeanFactoryAware
+
+initializeBean() -> applyBeanPostProcessorsBeforeInitialization() -> ApplicationContextAwareProcessor#postProcessBeforeInitialization -> invokeAwareInterfaces, 
+设置剩余的 EnvironmentAware...

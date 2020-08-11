@@ -2,6 +2,7 @@ package com.heiku.spring.springbootlearning.lifecycle;
 
 import com.heiku.spring.springbootlearning.entity.ScopeEntity;
 import com.heiku.spring.springbootlearning.entity.User;
+import com.heiku.spring.springbootlearning.entity.UserHolder;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValues;
@@ -25,11 +26,14 @@ public class BeanInstantiationLifecycleDemo {
         beanFactory.addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
         applicationContext.refresh();
 
-        User user = beanFactory.getBean(User.class);
+        /*User user = beanFactory.getBean(User.class);
         System.out.println(user);
 
         ScopeEntity entity = beanFactory.getBean(ScopeEntity.class);
-        System.out.println(entity);
+        System.out.println(entity);*/
+
+        UserHolder userHolder = beanFactory.getBean(UserHolder.class);
+        System.out.println(userHolder);
 
         applicationContext.close();
     }
@@ -82,5 +86,11 @@ public class BeanInstantiationLifecycleDemo {
         entity.setId(6790L);
         entity.setName("Heiku");
         return entity;
+    }
+
+    @Bean
+    public UserHolder userHolder() {
+        User user = new User("heiku", 12);
+        return new UserHolder(user);
     }
 }
