@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * Bean 实例化生命周期
+ *
  * @author Heiku
  * @date 2020/8/9
  **/

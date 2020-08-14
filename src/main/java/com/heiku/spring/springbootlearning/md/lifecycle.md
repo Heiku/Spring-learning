@@ -156,3 +156,33 @@ BeanClassLoaderAware, BeanFactoryAware
 
 initializeBean() -> applyBeanPostProcessorsBeforeInitialization() -> ApplicationContextAwareProcessor#postProcessBeforeInitialization -> invokeAwareInterfaces, 
 设置剩余的 EnvironmentAware...
+
+
+#### Spring Bean 初始化前阶段
+
+* 已完成
+
+    * Bean 实例化
+    
+    * Bean 属性赋值
+    
+    * Bean Aware 接口回调
+    
+* 方法回调
+
+    * BeanPostProcessor#postProcessBeforeInitialization
+    
+AbstractAutowireCapableBeanFactory#initializaBean -> applyBeanPostProcessorsBeforeInitialization(),  
+一般我们在 beanFactory.addBeanPostProcessor() 会在 beanFactory 中的 beanPostProcessorList 中添加，
+等到 processor 执行的时候一个一个执行。
+
+
+#### Spring Bean 初始化阶段
+
+* Bean 初始化 (Initialization)
+
+    * @PostConstruct 标注方法
+    
+    * 实现 InitializingBean 接口的 afterPropertiesSet() 方法
+    
+    * 自定义初始化方法
