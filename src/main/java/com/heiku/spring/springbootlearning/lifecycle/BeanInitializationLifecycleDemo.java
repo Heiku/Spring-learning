@@ -1,8 +1,6 @@
 package com.heiku.spring.springbootlearning.lifecycle;
 
-import com.heiku.spring.springbootlearning.entity.ScopeEntity;
 import com.heiku.spring.springbootlearning.entity.User;
-import com.heiku.spring.springbootlearning.entity.UserHolder;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -27,7 +25,7 @@ public class BeanInitializationLifecycleDemo {
         applicationContext.refresh();
 
         User user = beanFactory.getBean(User.class);
-        System.out.println(user);
+        System.out.printf("beanFactory get bean: user= %s\n", user.toString());
 
         applicationContext.close();
     }
@@ -38,7 +36,7 @@ public class BeanInitializationLifecycleDemo {
             if (ObjectUtils.nullSafeEquals(beanName, "user") && User.class.equals(bean.getClass())) {
                 User user = (User) bean;
                 user.setName("Heiku before");
-                System.out.println(user);
+                System.out.printf("beanPostProcessor before Initialization: user= %s\n", user.toString());
                 return user;
             }
             return null;
@@ -49,31 +47,15 @@ public class BeanInitializationLifecycleDemo {
             if (ObjectUtils.nullSafeEquals(beanName, "user") && User.class.equals(bean.getClass())) {
                 User user = (User) bean;
                 user.setName("Heiku after");
-                System.out.println(user);
+                System.out.printf("beanPostProcessor after Initialization: user= %s\n", user.toString());
                 return user;
             }
             return null;
         }
     }
 
-
-    @Bean
+    @Bean(initMethod = "customInitMethod")
     public User user() {
         return new User("Heiku", 12);
-    }
-
-    @Bean
-    public ScopeEntity entity() {
-        //return new ScopeEntity(6790L, "Heiku");
-        ScopeEntity entity = new ScopeEntity();
-        entity.setId(6790L);
-        entity.setName("Heiku");
-        return entity;
-    }
-
-    @Bean
-    public UserHolder userHolder() {
-        User user = new User("heiku", 12);
-        return new UserHolder(user);
     }
 }

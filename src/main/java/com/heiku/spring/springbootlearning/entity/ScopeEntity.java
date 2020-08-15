@@ -6,9 +6,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.BeanNameAware;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 /**
  * @author Heiku
  * @date 2020/7/26
@@ -31,7 +28,7 @@ public class ScopeEntity implements BeanNameAware {
         this.beanName = name;
     }
 
-    @PostConstruct
+/*    @PostConstruct
     public void init() {
         System.out.println(this.beanName + " init");
     }
@@ -39,5 +36,5 @@ public class ScopeEntity implements BeanNameAware {
     @PreDestroy
     public void destroy() {
         System.out.println(this.beanName + " destroy");
-    }
+    }*/
 }

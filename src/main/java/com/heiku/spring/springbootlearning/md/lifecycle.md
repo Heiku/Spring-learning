@@ -176,6 +176,8 @@ AbstractAutowireCapableBeanFactory#initializaBean -> applyBeanPostProcessorsBefo
 一般我们在 beanFactory.addBeanPostProcessor() 会在 beanFactory 中的 beanPostProcessorList 中添加，
 等到 processor 执行的时候一个一个执行。
 
+postProcessAfterInitialization 类似
+
 
 #### Spring Bean 初始化阶段
 
@@ -183,6 +185,35 @@ AbstractAutowireCapableBeanFactory#initializaBean -> applyBeanPostProcessorsBefo
 
     * @PostConstruct 标注方法
     
+        @PostConstruct 会被 CommonAnnotationBeanPostProcessor(extends InitDestroyAnnotationBeanPostProcessor) 添加扫描，最终的执行
+        都是在 InitDestroyAnnotationBeanPostProcessor 中处理，InitDestroyAnnotationBeanPostProcessor 中有两个list initAnnotationType，
+        destroyAnnotationType，用于存储含有 @PostConstruct、@PreDestroy 的 beanClass，所有的 beanClass 都被封装成了 lifecycleMetaData 
+        存放于 lifecycleMetadataCache，可以方便地进行反射调用（方法执行或者属性注入）
+        
+        InitDestroyAnnotationBeanPostProcessor 本质上就是一个 beanPostProcessor，在上面的 AbstractAutowireCapableBeanFactory#initializaBean 
+        执行初始化时，会调用 beanPostProcessor 的 postProcessBeforeInitialization()，而 InitDestroyAnnotationBeanPostProcessor 的 before... 
+        本质上就是调用 lifecycleMetaDataCache 中含有 LiefcycleMetadata#initMethods(@PostConstruct 注解) 的对象，最后通过反射一个一个调用 
+        method 对象.
+    
     * 实现 InitializingBean 接口的 afterPropertiesSet() 方法
     
+        AbstractAutowireCapableBeanFactory#initializaBean __实际初始化__ invokeInitMethods()，如果 bean instanceOf InitializingBean，
+        那么调用 ((InitializingBean) bean).afterPropertiesSet().
+    
     * 自定义初始化方法
+        
+        接着就是 bean 自定义的初始化方法 (xml init-method, annotation @Bean(initMethod=""))，invokeCustomInitMethod()
+
+
+#### Spring Bean 初始化后阶段
+
+* 方法回调
+
+    * BeanPostProcessor#postProcessAfterInitalization
+    
+
+#### Spring Bean 初始化完成阶段
+
+* 方法回调
+
+    * Spring 4.1+: SmartInitializingSingleton#afterSingletonInstantiated
