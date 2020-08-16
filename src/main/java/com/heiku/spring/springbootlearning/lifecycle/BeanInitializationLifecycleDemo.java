@@ -16,7 +16,6 @@ import org.springframework.util.ObjectUtils;
  **/
 public class BeanInitializationLifecycleDemo {
 
-
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
         applicationContext.register(BeanInitializationLifecycleDemo.class);

@@ -3,10 +3,12 @@ package com.heiku.spring.springbootlearning.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  * user entity
@@ -17,7 +19,7 @@ import javax.annotation.PostConstruct;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements InitializingBean, SmartInitializingSingleton {
+public class User implements InitializingBean, SmartInitializingSingleton, DisposableBean {
 
     private String name;
 
@@ -44,6 +46,20 @@ public class User implements InitializingBean, SmartInitializingSingleton {
 
     @Override
     public void afterSingletonsInstantiated() {
-        System.out.printf("afterSingletonsInstantiated : user=%s\n", this.toString());
+        System.out.printf("afterSingletonsInstantiated: user=%s\n", this.toString());
+    }
+
+    @PreDestroy
+    public void end() {
+        System.out.printf("destruction @PreDestroy: user=%s\n", this.toString());
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.printf("destruction disposableBean: user=%s\n", this.toString());
+    }
+
+    public void customDestroyMethod() {
+        System.out.printf("destruction customDestroyMethod: user=%s\n", this.toString());
     }
 }

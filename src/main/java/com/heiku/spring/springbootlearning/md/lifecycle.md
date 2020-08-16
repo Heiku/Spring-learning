@@ -217,3 +217,19 @@ postProcessAfterInitialization 类似
 * 方法回调
 
     * Spring 4.1+: SmartInitializingSingleton#afterSingletonInstantiated
+    
+AbstractApplicationContext#refresh() -> finishBeanFactoryInitialization() -> beanFactory.preInstantiateSingletons() 
+这时候对 beanFactory 中的所有实例进行最终的实例初始化，具体实现为 DefaultListableBeanFactory#preInstantiateSingletons()
+
+
+#### Spring Bean 销毁前阶段
+
+* 方法回调
+
+    * DestructionAwareBeanPostProcessor#postProcessBeforeDestruction
+
+类似与 @PostConstruct，在 CommonAnnotationBeanPostProcessor 设置销毁注解 @PreDestroy, 当 AbstractBeanFactory#destroyBean() 
+主动销毁 bean 的时候，会构建 DisposableBeanAdapter#destroy 去调用具体的销毁流程。
+
+具体调用过程就会先执行 DestructionAwareBeanPostProcessor#postProcessBeforeDerstruction(@PreDestroy), 接着是实现的接口 DisposableBean
+的 destroy()，然后执行 bean 中自定义的销毁方法。
