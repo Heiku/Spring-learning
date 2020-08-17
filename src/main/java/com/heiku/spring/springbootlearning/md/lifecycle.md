@@ -233,3 +233,64 @@ AbstractApplicationContext#refresh() -> finishBeanFactoryInitialization() -> bea
 
 具体调用过程就会先执行 DestructionAwareBeanPostProcessor#postProcessBeforeDerstruction(@PreDestroy), 接着是实现的接口 DisposableBean
 的 destroy()，然后执行 bean 中自定义的销毁方法。
+
+
+#### Spring Bean 销毁阶段
+
+* Bean 销毁 (Destroy)
+
+    * @PreDestroy 标注方法
+    
+    * 实现DisposableBean 接口的 destroy() 方法
+    
+    * 自定义销毁方法
+    
+applicationContext#close() -> doClose() -> beanFactory.destroyBean() 销毁所有的 bean
+
+
+#### Spring Bean 垃圾收集
+
+* Bean 垃圾回收 (GC)
+
+    * 关闭 Spring 容器 (应用上下文)
+    
+    * 执行 GC
+    
+    * Spring Bean 覆盖的 finalize() 方法回调
+    
+    
+##### BeanPostProcessor
+
+beanPostProcessor 提供了 Spring Bean 初始化前和初始化后的生命回调，比如 postProcessBeforeInitialization, after...，
+并允许其他 beanPostProcessor 实现扩展，例如 InstantiationBeanPostProcessor, DestructionBeanPostProcessor 进行实例化或销毁的
+回调。
+
+其中 ApplicationContext 相关的 Aware 回调基于 BeanPostProcessor，在 ApplicationContextAwareProcessor 中实现。
+
+
+##### BeanFactoryPostProcessor 与 BeanPostProcessor 区别：
+
+BeanFactoryPostProcessor 是 Spring BeanFactory 的后置处理器，用于扩展 beanFactory ，或者通过 beanFactory 进行依赖查找或依赖注入,
+必须要有 ApplicationContext 关联执行，因为 beanFactory 依托于 applicationContext 启动执行处理，本身只是个容器。
+
+
+#### bean 生命周期
+
+* beanDefinition 注册阶段: registerBeanDefinition
+* beanDefinition 合并阶段: getMergedBeanDefinition
+
+* bean 实例化前: resolveBeforeInstantiation
+* bean 实例化后: createBeanInstance
+* bean 实例化后： populateBean
+
+* bean 属性赋值前: populateBean
+* bean 属性赋值： populateBean
+
+* bean aware 接口回调阶段: initializeBean
+* bean 初始化前: initializeBean
+* bean 初始化: initializeBean
+* bean 初始化后: initializeBean
+* bean 初始化完成: preInstantiateSingletons
+
+* bean 销毁前: destroyBean
+* bean 销毁: destroyBean
