@@ -45,3 +45,30 @@
     * <context:annotation-config />: 激活 Spring 注解驱动
     
     * <context:component-scan />: Spring @Component 以及自定义注解扫描
+    
+
+
+#### 基于 Java 注解装载 Spring Bean 配置元信息
+
+* Spring 模式注解
+
+    * @Repository: 数据仓储模式
+    
+    * @Component: 通用组件模式
+    
+    * @Service: 服务模式
+    
+    * @Controller: Web 控制器模式
+    
+    * @Configuration: 配置模式
+     
+     
+#### Spring Bean 配置元信息底层实现
+
+* Spring BeanDefinition 解析与注册
+
+    * XML 资源: XmlBeanDefinitionReader
+    
+    * Properties 资源: PropertiesBeanDefinitionReader
+    
+    * Java 注解: AnnotatedBeanDefinitionReader
