@@ -34,12 +34,12 @@ genericBeanDefinition.setPropertyValues();
 
 * XML
 
-`<bena name="" class="User.class"/>`
+`<bean name="" class="User.class"/>`
 
 * Annotation
 
     * @Bean
-    * @Componment
+    * @Component
     * @Import
     
 * Java API
@@ -116,7 +116,7 @@ Bean 初始化 (Initialization)
     
     * Java API： AbstractBeanDefinition#setInitMethodName(string)
     
-优先级如下：@PostConstruct -> afterPropertiesSet() -> init-method
+优先级如下：@PostConstruct -> InitializingBean -> init-method
 
 
 #### 延迟初始化 Spring Bean

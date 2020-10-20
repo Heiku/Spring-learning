@@ -18,8 +18,8 @@ public class SpringbootlLearningApplication {
 
        /* ConversionService service = SpringUtil.getCtx().getBean(ConversionService.class);
         System.out.println(service.convert("25", Integer.class));*/
-        BeanDefinitionDemo demo = (BeanDefinitionDemo) SpringUtil.getCtx().getBean("beanDefinitionDemo");
-        demo.run();
+       /* BeanDefinitionDemo demo = (BeanDefinitionDemo) SpringUtil.getCtx().getBean("beanDefinitionDemo");
+        demo.run();*/
     }
 
 /*    @Override
