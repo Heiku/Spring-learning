@@ -11,7 +11,6 @@ BeanDefinition 是 Spring Framework 中定义 bean 配置元信息的接口，�
 
 * 配置设置，比如 Bean 属性（Properties）
 
-
 #### 构建 BeanDefinition
 
 * BeanDefinitionBuilder
