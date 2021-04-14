@@ -1,6 +1,5 @@
 package com.heiku.spring.springbootlearning;
 
-import com.heiku.spring.springbootlearning.beanDefinition.BeanDefinitionDemo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
