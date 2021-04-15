@@ -39,6 +39,7 @@ SpringBoot 启动大致分为两部分，1.  构建 SpringApplication 2. run()
 2. invokeBeanFactoryPostProcessor()
 
    调用所有的 beanFactoryProcessor，其中要特别注意的是会调用 ConfigurationClassPostProcessor 这个 beanFactoryPostProcessor，通过 ConfigurationClassParser 对配置项进行扫描，然后将定义的 beanDefinition 添加到容器中。
+   这个过程主要是通过 ConfigurationClassParser 实现，扫描解析 @ComponentScan、@Import 注解的配置类，`parser.parse()`，根据上面的配置类解析 @Bean、@Component的类成 BeanDefinition，`reader.loadBeanDefinition()`，
 
 
 
