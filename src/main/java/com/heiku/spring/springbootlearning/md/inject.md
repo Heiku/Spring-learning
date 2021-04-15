@@ -216,3 +216,12 @@ LifeCycleMetadata，并通过 `LifecycleMetadata#invokeInitMethods / invokeDestr
 * 字段注入
 
 * 接口回调注入
+
+
+### 循环依赖
+
+采用三级缓存 + 提前暴露的方式解决循环依赖的问题
+
+* singletonFactories: 仅通过构造器反射生成对象，尚未进行 populate 进行实例话填充
+* earlySingletonObjects：已经调用了 beanPostProcessor
+* singletonObjects：已经实例话完成
